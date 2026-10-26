@@ -4,17 +4,20 @@ public class CameraLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
 
-    private float xRotation = 0f; // Haut / Bas
-    private float yRotation = 0f; // Gauche / Droite
+    private float xRotation = 0f;
+    private float yRotation = 0f;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        // LA LIGNE MAGIQUE : On sauvegarde la rotation actuelle de la caméra
+        // au lieu de la forcer à 0.
+        yRotation = transform.localEulerAngles.y;
     }
 
     void Update()
     {
-        // Si on clique, on s'assure que la souris est bien capturée dans le jeu
         if (Input.GetMouseButtonDown(0))
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -23,13 +26,11 @@ public class CameraLook : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        // Calcul de la rotation
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -60f, 60f); // Limite pour ne pas se casser le cou
+        xRotation = Mathf.Clamp(xRotation, -60f, 60f);
 
         yRotation += mouseX;
 
-        // On applique les deux rotations en même temps sur l'axe local de la caméra
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
 }

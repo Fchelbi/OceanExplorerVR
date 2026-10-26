@@ -481,6 +481,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BoatController
   moveSpeed: 10
   turnSpeed: 50
+  minX: -25.8
+  maxX: 36.2
+  minZ: -34.05
+  maxZ: 17.95
 --- !u!1 &1008922973
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +702,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a9dd2e0597b79224c9cb120860ece56e, type: 2}
+  - {fileID: 2100000, guid: e0b986d5114625742bdfa6be44780524, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1418,7 +1422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6893429184573779908, guid: 58ed0a0f854574347a81f91d708d1038, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

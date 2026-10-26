@@ -1,17 +1,20 @@
 using UnityEngine;
-using TMPro;
+using TMPro; // Pour TextMeshPro
 
 public class HookCollision : MonoBehaviour
 {
     private static int score = 0;
     private TextMeshProUGUI scoreUI;
-    private bool hasCaughtSomething = false; // <-- Sécurité anti-double collision
+    private bool hasCaughtSomething = false;
+
+   
+    public static void ResetScore()
+    {
+        score = 0;
+    }
 
     void Start()
     {
-        // On remet le score à 0 au démarrage du jeu
-        if (score > 0 && Time.time < 1f) score = 0;
-
         GameObject textObj = GameObject.Find("ScoreText");
         if (textObj != null)
         {
@@ -22,12 +25,13 @@ public class HookCollision : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Si on a déjà attrapé quelque chose avec CET hameçon, on ignore
         if (hasCaughtSomething) return;
+
+        Debug.Log("L'hameçon a touché : " + other.gameObject.name + " | Tag : " + other.tag);
 
         if (other.CompareTag("Fish"))
         {
-            hasCaughtSomething = true; // On bloque les autres collisions
+            hasCaughtSomething = true;
             Debug.Log("🎉 POISSON ATTRAPÉ !");
 
             if (other.transform.parent != null)
@@ -35,9 +39,8 @@ public class HookCollision : MonoBehaviour
             else
                 Destroy(other.gameObject);
 
-            score += 10;
+            score += 50;
             UpdateUI();
-
             Destroy(gameObject);
         }
 

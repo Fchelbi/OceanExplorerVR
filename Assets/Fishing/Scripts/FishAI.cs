@@ -13,7 +13,7 @@ public class FishAI : MonoBehaviour
 
     void Update()
     {
-        // Si le poisson est presque arrivé à destination, il en choisit une nouvelle
+        
         if (!agent.pathPending && agent.remainingDistance < 1f)
         {
             MoveToRandomPoint();
@@ -22,8 +22,8 @@ public class FishAI : MonoBehaviour
 
     void MoveToRandomPoint()
     {
-        // Trouve un point aléatoire sur la zone bleue (NavMesh)
-        Vector3 randomDirection = Random.insideUnitSphere * 15f; // 15f = rayon de recherche
+       
+        Vector3 randomDirection = Random.insideUnitSphere * 15f; 
         randomDirection += transform.position;
 
         NavMeshHit hit;
