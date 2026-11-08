@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 952b331f45e76f143a5a773236cf207d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - victimPrefab: {instanceID: 0}
+  - bigShip: {instanceID: 0}
+  - nearMarker: {instanceID: 0}
+  - farMarker: {instanceID: 0}
+  - boat: {instanceID: 0}
+  - jetski: {instanceID: 0}
+  - cameraFollow: {instanceID: 0}
+  - beachDropPoint: {instanceID: 0}
+  - medicalPoint: {instanceID: 0}
+  - choicePanel: {instanceID: 0}
+  - endPanel: {instanceID: 0}
+  - alertText: {instanceID: 0}
+  - infoText: {instanceID: 0}
+  - messageText: {instanceID: 0}
+  - endText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

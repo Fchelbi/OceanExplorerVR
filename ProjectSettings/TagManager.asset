@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Buoy
-  - Boat
   - Victim
-  - Victime
-  - Bouee
+  - BeachZone
   layers:
   - Default
   - TransparentFX
