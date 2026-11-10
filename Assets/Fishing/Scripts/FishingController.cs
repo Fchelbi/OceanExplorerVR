@@ -6,9 +6,11 @@ public class FishingController : MonoBehaviour
     public Transform rodTip;
     public float castForce = 15f;
 
+    // NOUVEAU : La case pour glisser ta canne dans l'Inspector
+    public Animator rodAnimator;
+
     void Start()
     {
-        
         HookCollision.ResetScore();
     }
 
@@ -17,6 +19,13 @@ public class FishingController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Clic détecté ! Je lance l'hameçon.");
+
+            // NOUVEAU : On déclenche l'animation avant de lancer la ligne
+            if (rodAnimator != null)
+            {
+                rodAnimator.SetTrigger("Cast");
+            }
+
             CastLine();
         }
     }
