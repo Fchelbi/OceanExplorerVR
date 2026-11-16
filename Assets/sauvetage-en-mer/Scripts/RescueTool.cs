@@ -25,16 +25,41 @@ public class RescueTool : MonoBehaviour
 
     void ThrowBuoy()
     {
-        if (currentBuoy != null) { GameManager.Instance.ShowMessage("Une bouée est déjà à l'eau !"); return; }
-        if (onBoard.Count >= capacity) { GameManager.Instance.ShowMessage("Véhicule plein ! Retourne à la plage."); return; }
+        // Bloqué seulement si la bouée est accrochée à une victime
+        if (currentBuoy != null && currentBuoy.victim != null)
+        {
+            GameManager.Instance.ShowMessage("La bouée est accrochée ! Tire la victime avec E.");
+            return;
+        }
+        if (onBoard.Count >= capacity)
+        {
+            GameManager.Instance.ShowMessage("Véhicule plein ! Retourne à la plage.");
+            return;
+        }
 
-        Vector3 dir = transform.forward;
+        Vector3 start = throwPoint.position;
+
+        // Point visé : la victime la plus proche, sinon 8 m devant, au niveau de l'eau
         Victim target = FindNearestVictim();
+        Vector3 aim;
         if (target != null)
-            dir = (target.transform.position - throwPoint.position).normalized;
+        {
+            aim = target.transform.position;
+        }
+        else
+        {
+            aim = start + transform.forward * 8f;
+            aim.y = 0f;
+        }
 
-        GameObject buoy = Instantiate(buoyPrefab, throwPoint.position, Quaternion.identity);
-        buoy.GetComponent<Rigidbody>().linearVelocity = dir * throwSpeed;
+        // Trajectoire en arc (gravité comprise) qui arrive pile sur le point visé
+        Vector3 delta = aim - start;
+        float flightTime = Mathf.Max(0.4f, delta.magnitude / throwSpeed);
+        Vector3 velocity = delta / flightTime;
+        velocity.y = delta.y / flightTime - 0.5f * Physics.gravity.y * flightTime;
+
+        GameObject buoy = Instantiate(buoyPrefab, start, Quaternion.identity);
+        buoy.GetComponent<Rigidbody>().linearVelocity = velocity;
         currentBuoy = buoy.GetComponent<RescueBuoy>();
     }
 
@@ -77,7 +102,8 @@ public class RescueTool : MonoBehaviour
     public void Board(Victim v)
     {
         onBoard.Add(v);
-        if (currentBuoy != null) Destroy(currentBuoy.gameObject);
+        if (currentBuoy != null) Destroy(currentBuoy.gameObject);   // seulement la bouée utilisée
+        currentBuoy = null;
 
         v.transform.SetParent(seat);
         v.transform.localPosition = new Vector3(0f, 0f, -(onBoard.Count - 1) * 0.5f);
