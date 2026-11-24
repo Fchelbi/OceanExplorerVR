@@ -214,8 +214,11 @@ MonoBehaviour:
   climbStateName: Climb
   climbDuration: 1.5
   sidePadding: 0.6
+  hopHeight: 0.4
+  enterDelay: 0.35
   model: {fileID: 0}
   standY: 0
+  standRotY: 0
 --- !u!1001 &7199860207042923061
 PrefabInstance:
   m_ObjectHideFlags: 0

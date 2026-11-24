@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RescueBuoy
   victim: {fileID: 0}
   waterLevel: 0
-  sinkDepth: 0
+  surfaceOffset: 0.05
 --- !u!1001 &3904348383031806652
 PrefabInstance:
   m_ObjectHideFlags: 0
